@@ -30,9 +30,11 @@ SAMPLE OUTPUT:
 Eligible to Win
 
 */
+// for significant figure use cout<<setprecsion(n)<<float_num;
+// for significant decimal figure use cout<<fixed<<setprecsion(n)<<float_num;
 
 #include <iostream>
-#include <cmath>
+#include <iomanip>
 using namespace std;
 
 int main()
@@ -41,22 +43,24 @@ int main()
     int t_balls, t_runs, c_runs, c_balls, overs;
     float finished_overs, crr, rrr;
     cin >> t_balls >> t_runs >> c_runs >> c_balls;
+
     overs = t_balls / 6;
-    finished_overs = (float)(((45 / 6) * 10) + (45 % 6)) / 10;
-    crr = roundf((float)(c_runs / finished_overs));
-    rrr = ceil((float)t_runs / overs);
-    cout.precision(1);
+    finished_overs = (c_balls / 6) + ((c_balls % 6) * 0.1); // Multiply by 0.1 is better that divideby 10
+    crr = c_runs * (1 / finished_overs);
+    // rrr = (t_runs / overs) + ((t_runs % overs) * 0.1);
+    rrr = (375 / 50) + ((375 % 50) * 0.02);
+
     cout << overs << endl;
-    cout << finished_overs << endl;
-    cout << crr << endl;
-    // cout << rrr << endl;
-    // if (rrr > crr)
-    // {
-    //     cout << "Not Eligible to Win";
-    // }
-    // else
-    // {
-    //     cout << "Eligible to Win";
-    // }
+    cout << fixed << setprecision(1) << finished_overs << endl;
+    cout << fixed << setprecision(1) << crr << endl;
+    cout << fixed << setprecision(1) << rrr << endl;
+    if (rrr > crr)
+    {
+        cout << "Not Eligible to Win";
+    }
+    else
+    {
+        cout << "Eligible to Win";
+    }
     return 0;
 }
