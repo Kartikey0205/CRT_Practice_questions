@@ -28,36 +28,62 @@ Input (stdin)
 Output (stdout)
 Kaprekar Number
 */
-
 #include <iostream>
 #include <cmath>
 using namespace std;
-
 int main()
 {
-    // Try out your code here
-    int digit, sum = 0, sqr, sumSqr = 0;
-    cin >> digit;
-    sqr = pow(digit, 2);
-    while (digit != 0)
+    int k, m, n, temp, i = 0, j = 0, count = 0, c, a, b, r1 = 0, r2 = 0, r3, r4;
+    cin >> k;
+    temp = k * k;
+    m = temp;
+    n = temp;
+    while (temp > 0)
     {
-        int rem = digit % 10;
-        sum = sum + rem;
-        digit = digit / 10;
+        temp = temp / 10;
+        count++;
     }
-    while (sqr != 0)
+
+    if (count % 2 != 0)
     {
-        int rem = sqr % 10;
-        sumSqr = sumSqr + rem;
-        sqr = sqr / 10;
+        c = count / 2;
+
+        while (m > 0 && i <= c)
+        {
+            m = m / 10;
+            i++;
+            r1 = m;
+        }
+        while (n > 0 && j <= c)
+        {
+            b = n % 10;
+            r2 = r2 + b * pow(10, j);
+            n = n / 10;
+            j++;
+        }
     }
-    if (sumSqr == sum)
-    {
-        cout << "Kaprekar Number";
-    }
+
     else
     {
-        cout << "Not a Kaprekar Number";
+        c = count / 2;
+        while (m > 0 && i < c)
+        {
+            m = m / 10;
+            i++;
+            r1 = m;
+        }
+        while (n > 0 && j < c)
+        {
+            b = n % 10;
+            r2 = r2 + b * pow(10, j);
+            n = n / 10;
+            j++;
+        }
     }
+
+    if ((r1 + r2) == k)
+        cout << "Kaprekar Number";
+    else
+        cout << "Not a Kaprekar Number";
     return 0;
 }
