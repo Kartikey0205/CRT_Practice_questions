@@ -72,4 +72,61 @@ Array after insertion is
 10
 4
 5
+
+Input (stdin)
+4
+1
+2
+3
+4
+8
+
+Output (stdout)
+Enter the number of elements in the array
+Enter the elements in the array
+Enter the location where you wish to insert an element
+Invalid Input
 */
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int num, loc, value;
+    cout << "Enter the number of elements in the array" << endl;
+    cin >> num;
+    int card[num];
+    cout << "Enter the elements in the array" << endl;
+    for (int i = 1; i <= num; i++)
+    {
+        cin >> card[i];
+    }
+    cout << "Enter the location where you wish to insert an element" << endl;
+    cin >> loc;
+    if (loc < num)
+    {
+
+        cout << "Enter the value to insert" << endl;
+        cin >> value;
+        cout << "Array after insertion is" << endl;
+        for (int i = 1; i <= num + 1; i++)
+        {
+            if (i == loc)
+            {
+                int diff = (num + 1) - i;
+                while (diff != 0)
+                {
+                    card[loc + diff] = card[(loc + diff) - 1];
+                    diff--;
+                }
+                card[loc] = value;
+            }
+            cout << card[i] << endl;
+        }
+    }
+    else
+    {
+        cout << "Invalid Input";
+    }
+    return 0;
+}
